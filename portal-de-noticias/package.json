@@ -1,0 +1,32 @@
+{
+  "name": "nodejs-mongodb",
+  "version": "1.0.0",
+  "description": "",
+  "main": "noticias.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FilipeBittencourt/nodejs-mongodb.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FilipeBittencourt/nodejs-mongodb/issues"
+  },
+  "homepage": "https://github.com/FilipeBittencourt/nodejs-mongodb#readme",
+  "dependencies": {
+    "body-parser": "^1.17.2",
+    "consign": "^0.1.4",
+    "ejs": "^2.5.6",
+    "express": "^4.15.2",
+    "express-validator": "^3.2.0",
+    "mysql": "^2.13.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-config-rallycoding": "^3.2.0"
+  }
+}

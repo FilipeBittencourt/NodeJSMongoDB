@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Formulário de cadastro de Notícia</title>
+</head>
+<style>
+    table,
+    td {
+        border: 0px solid black;
+        border-collapse: collapse;
+        padding: 15px;
+        border-spacing: 5px;
+    }
+</style>
+
+<body>
+
+    <h1>Adicionar notícia</h1>
+
+    <% if(validacao) { %>
+        <ul>
+            <% for(var i = 0; i < validacao.length; i++) {%>
+                <li>
+                    <%= validacao[i].msg %>
+                </li>
+                <%}%>
+        </ul>
+
+        <%}%>
+            <form action="/noticias/salvar" method="post">
+                <table>
+                    <tr>
+                        <td> <label>Titulo</label></td>
+                        <td> <input type="text" id="titulo" name="titulo"  value="<%=noticia.titulo%>" placeholder="Titulo da notícia" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Resumo</label></td>
+                        <td><input type="text" id="resumo" name="resumo" value="<%=noticia.resumo%>" placeholder="Resumo da notícia" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Nome autor</label></td>
+                        <td><input type="text" id="autor" name="autor" value="<%=noticia.autor%>" placeholder="Autor da notícia" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Data dos fatos</label></td>
+                        <td><input type="date" id="data_noticia" name="data_noticia" value="<%=noticia.data_noticia%>" placeholder="Data da notícia" /></td>
+                    </tr>
+                    <tr>
+                        <td><label>Notícias</label></td>
+                        <td><textarea type="text" id="noticias" name="noticias"  rows="5" cols="30"><%=noticia.noticias%></textarea></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><input type="submit" value="enviar" /></td>
+                    </tr>
+                </table>
+                </from>
+
+
+
+
+</body>
+
+</html>

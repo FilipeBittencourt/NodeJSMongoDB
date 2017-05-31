@@ -1,0 +1,41 @@
+abrir o terminal e digitar:
+
+npm init -y
+npm install express --save
+npm install -g nodemon --save
+
+EJS -> É uma engine de views que permite criação de paginas dinamicas em HTML enviando diretamente para o browser. 
+npm install ejs --save
+
+npm install -g tsd
+npm install eslint --save-dev
+
+
+
+
+
+//------------------
+mysql -u root -p
+
+show databases;
+
+create database portal_noticias;
+
+use portal_noticias;
+
+create table noticias(
+id int not null primary key auto_increment,
+titulo varchar(100),
+noticias text,
+data_criacao timestamp default current_timestamp);
+
+insert into noticias(titulo,noticias)values('Crise política ameaça paralisar trabalhos da semana no Congresso','Delações de Joesley e Wesley Batista, da JBS, geraram a maior crise do governo desde que Temer assumiu e resultaram em um inquérito para investigar o presidente; Aécio foi afastado do Senado.');
+
+insert into noticias(titulo,noticias)values('China inaugura a maior roda gigante do mundo sem aros centrais','Mais um marco arquitetônico é revelado na China. Depois da ponte de vidro e da escada rolante, é a vez do país ultrapassar um dos marcos turísticos mais importantes de Londres, a London Eye.');
+
+select * from noticias;
+
+alter table noticias add column resumo varchar(100);
+alter table noticias add column autor varchar(30);
+alter table noticias add column data_noticia date;
+
