@@ -1,6 +1,5 @@
 module.exports = function (application) {
     application.get('/', function (req, res) {
-        //res.send('index');
-        res.render('index');
+        application.app.controllers.indexController.indexView(application, req, res);
     });
 }

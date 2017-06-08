@@ -14,5 +14,8 @@
     "ejs": "^2.5.2",
     "express": "^4.14.0",
     "express-validator": "^2.20.8"
+  },
+  "devDependencies": {
+    "eslint-config-rallycoding": "^3.2.0"
   }
 }
