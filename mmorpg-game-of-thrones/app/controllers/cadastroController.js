@@ -1,7 +1,29 @@
 module.exports.cadastroView = function (application, req, res) {
-    res.render('cadastroView');
+    res.render('cadastroView', { validacao: {}, dadosForm: {} });
 };
 
-module.exports.cadastroView = function (application, req, res) {
-    res.send('teste');
-}
+module.exports.cadastrar = function (application, req, res) {
+    req.assert('nome', 'Nome é obrigatório').notEmpty();
+    req.assert('usuario', 'Usuario é obrigatório').notEmpty();
+    req.assert('senha', 'Senha é obrigatório').notEmpty();
+    req.assert('casa', 'Casa é obrigatório').notEmpty();
+    if (req.validationErrors()) {
+        res.render('cadastroView', { validacao: req.validationErrors(), dadosForm: req.body });
+        return;
+    }
+    res.send('podemos cadastrar');
+    const connection = application.config.dbConnection;
+ 
+
+    /*
+    req.assert('senha', 'Senha deve conter entre 10 e 100 caracteres').len(10, 100);    
+    req.assert('data_noticia', 'Data é obrigatório').notEmpty().isDate({ format: 'YYYY-MM-DD' });
+    req.assert('noticias', 'Noticias é obrigatório').notEmpty();
+ 
+    if (req.validationErrors()) {
+        res.render('admin/formulario_inclusao_noticia',
+            { validacao: req.validationErrors(), noticia: noticia });
+        return;
+    }
+    */
+};

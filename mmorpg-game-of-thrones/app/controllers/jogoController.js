@@ -1,3 +1,3 @@
 module.exports.jogoView = function (application, req, res) {
-        res.render('jogoView')
+        res.render('jogoView');
 };
