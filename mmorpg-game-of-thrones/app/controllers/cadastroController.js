@@ -11,9 +11,12 @@ module.exports.cadastrar = function (application, req, res) {
         res.render('cadastroView', { validacao: req.validationErrors(), dadosForm: req.body });
         return;
     }
-    res.send('podemos cadastrar');
+
     const connection = application.config.dbConnection;
- 
+    const usuarioModel = new application.app.models.usuarioModel(connection);
+    usuarioModel.inserirUsuario(req.body);
+
+    res.send('podemos cadastrar');
 
     /*
     req.assert('senha', 'Senha deve conter entre 10 e 100 caracteres').len(10, 100);    

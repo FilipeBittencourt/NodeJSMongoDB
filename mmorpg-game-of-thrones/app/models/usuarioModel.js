@@ -1,25 +1,44 @@
-function usuarioModel() {
-    const self = {};
-    self.add({
-        name: {
-            type: String,
-            required: true
-        },
-        usuario: {
-            type: String,
-            required: true
-        },
-        email: {
-            type: String,
-            required: true
-        }
-    });
-
-    return self;
+function usuarioModel(connection) {
+    this._connection = connection();
 }
 
-usuarioModel.prototype.usuario = function (usuario) {
-    return usuario;
+usuarioModel.prototype.inserirUsuario = function (usuario) {
+    this._connection.open((err, mongoClient) => {
+        if (err) {
+            console.log(err);
+            return err;
+        }
+        mongoClient.collection('usuario', (errMongo, collection) => {
+            if (errMongo) {
+                console.log(errMongo);
+                return errMongo;
+            }
+            collection.insert(usuario);
+            mongoClient.close();
+        });
+    });
+};
+
+usuarioModel.prototype.autenticar = function (usuario, callback) {
+    this._connection.open((err, mongoClient) => {
+        if (err) {
+            return callback(err);
+        }
+        mongoClient.collection('usuario', (errMongo, collection) => {
+            if (errMongo) {
+                return callback(errMongo);
+            }
+            collection.find(usuario).toArray((errFind, arrayUser) => {
+                if (errFind) {
+                    callback(errFind);
+                } else {
+                    callback(null, arrayUser);
+                }
+                mongoClient.close();
+            });
+        });
+    });
+    return callback;
 };
 
 module.exports = function () {

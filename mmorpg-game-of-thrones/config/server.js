@@ -10,6 +10,9 @@ const bodyParser = require('body-parser');
 /* importar o módulo do express-validator */
 const expressValidator = require('express-validator');
 
+/* importar o módulo do express-session */
+const expressSession = require('express-session');
+
 /* iniciar o objeto do express */
 const app = express();
 
@@ -25,6 +28,13 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 /* configurar o middleware express-validator */
 app.use(expressValidator());
+
+/* configurar o middleware express-session */
+app.use(expressSession({
+    secret: '123D3Ol1v31rA4',
+    resave: Boolean,
+    saveUninitialized: Boolean
+}));
 
 /* efetua o autoload das rotas, dos models e dos controllers para o objeto app */
 consign()
