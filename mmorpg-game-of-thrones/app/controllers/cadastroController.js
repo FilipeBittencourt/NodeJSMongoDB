@@ -14,19 +14,8 @@ module.exports.cadastrar = function (application, req, res) {
 
     const connection = application.config.dbConnection;
     const usuarioModel = new application.app.models.usuarioModel(connection);
+    const jogoModel = new application.app.models.jogoModel(connection);    
     usuarioModel.inserirUsuario(req.body);
-
-    res.send('podemos cadastrar');
-
-    /*
-    req.assert('senha', 'Senha deve conter entre 10 e 100 caracteres').len(10, 100);    
-    req.assert('data_noticia', 'Data é obrigatório').notEmpty().isDate({ format: 'YYYY-MM-DD' });
-    req.assert('noticias', 'Noticias é obrigatório').notEmpty();
- 
-    if (req.validationErrors()) {
-        res.render('admin/formulario_inclusao_noticia',
-            { validacao: req.validationErrors(), noticia: noticia });
-        return;
-    }
-    */
+    jogoModel.gerarParametros(req.body.usuario);
+    res.redirect('/');
 };

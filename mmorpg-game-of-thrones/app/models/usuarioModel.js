@@ -19,7 +19,7 @@ usuarioModel.prototype.inserirUsuario = function (usuario) {
     });
 };
 
-usuarioModel.prototype.autenticar = function (usuario, callback) {
+usuarioModel.prototype.findUsuario = function (usuario, callback) {
     this._connection.open((err, mongoClient) => {
         if (err) {
             return callback(err);
