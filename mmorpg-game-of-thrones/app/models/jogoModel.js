@@ -14,7 +14,7 @@ jogoModel.prototype.gerarParametros = function (usuario) {
             collection.insert({
                 usuario: usuario,
                 moeda: 10,
-                suditos: 15,
+                aldeao: 15,
                 sabedoria: Math.floor(Math.random() * 1000),
                 comercio: Math.floor(Math.random() * 1000),
                 temor: Math.floor(Math.random() * 1000),
@@ -38,7 +38,7 @@ jogoModel.prototype.iniciaJogo = function (usuario, callback) {
                 if (errFind) {
                     callback(errFind);
                 } else {
-                    callback(null, arrayFind);
+                    callback(null, arrayFind[0]);
                 }
                 mongoClient.close();
             });

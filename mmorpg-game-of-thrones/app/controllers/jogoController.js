@@ -4,11 +4,18 @@ module.exports.jogoView = function (application, req, res) {
         const jogoModel = new application.app.models.jogoModel(connection);
         jogoModel.iniciaJogo(req.session.usuario, (err, result) => {
             if (err) {
-                res.render('indexView', { validacao: err });
+                res.redirect('/');
+                return;
             }
-            res.render('jogoView', { validacao: result });
+            if (req.query.error !== undefined) {
+                res.render('jogoView', { user: req.session, jogo: result, error: 'true' });
+                return;
+            }
+            res.render('jogoView', { user: req.session, jogo: result, error: 'false' });
+            return;
         });
     } else {
         res.redirect('/');
+        return;
     }
 };
