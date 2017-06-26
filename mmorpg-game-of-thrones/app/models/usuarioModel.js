@@ -1,3 +1,5 @@
+const crypto = require('crypto');
+
 function usuarioModel(connection) {
     this._connection = connection();
 }
@@ -8,8 +10,9 @@ usuarioModel.prototype.inserirUsuario = function (usuario) {
             console.log(err);
             return err;
         }
+        usuario.senha = crypto.createHash('md5').update(usuario.senha).digest('hex');
         mongoClient.collection('usuario', (errMongo, collection) => {
-            if (errMongo) {               
+            if (errMongo) {
                 return errMongo;
             }
             collection.insert(usuario);
@@ -27,6 +30,7 @@ usuarioModel.prototype.findUsuario = function (usuario, callback) {
             if (errMongo) {
                 return callback(errMongo);
             }
+            usuario.senha = crypto.createHash('md5').update(usuario.senha).digest('hex');
             collection.find(usuario).toArray((errFind, arrayUser) => {
                 if (errFind) {
                     callback(errFind);

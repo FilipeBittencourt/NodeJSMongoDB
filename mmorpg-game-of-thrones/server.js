@@ -24,7 +24,8 @@ app.set('views', './app/views');
 app.use(express.static('./app/public'));
 
 /* configurar o middleware body-parser */
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.json({ limit: '10mb' }));
 
 /* configurar o middleware express-validator */
 app.use(expressValidator());
@@ -43,6 +44,23 @@ consign()
     .then('app/models')
     .then('app/controllers')
     .into(app);
+
+/* parametrizar a porta de escuta */
+app.listen(3003, () => {
+	console.log('Servidor online... porta 3003');
+});
+
+/* configurar o middleware erros das paganias ou msg de status */
+app.use((req, res, next) => {
+    res.status(404).send('Página não encontrada');
+    next();
+});
+
+/* configurar o middleware erros do SERVER ou msg de status */
+app.use((err, req, res, next) => {
+    res.status(500).send('Ops! Houve um erro interno.');
+    next();
+});
 
 /* exportar o objeto app */
 module.exports = app;

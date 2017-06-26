@@ -1,22 +1,21 @@
 {
-  "name": "RPG",
+  "name": "CamalionBiz",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "config/server.js",
   "scripts": {
+    "dev": "nodemon",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Filipe",
+  "author": "Sisnet",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.15.2",
     "consign": "^0.1.2",
-    "crypto": "0.0.3",
-    "ejs": "^2.5.2",
+    "crypto": "0.0.3",    
     "express": "^4.14.0",
     "express-session": "^1.15.3",
-    "express-validator": "^2.20.8",
-    "mongodb": "^2.2.28"
+    "express-validator": "^2.20.8"    
   },
   "devDependencies": {
     "eslint-config-rallycoding": "^3.2.0"
