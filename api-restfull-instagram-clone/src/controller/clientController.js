@@ -1,3 +1,3 @@
-module.exports.clientController = function (application, req, res) {
-    res.send({ msg: 'Hi client!' });
+module.exports.clientController = function (application, req, res, callback) {
+    return callback(null, { msg: 'Hi client!' });
 };
