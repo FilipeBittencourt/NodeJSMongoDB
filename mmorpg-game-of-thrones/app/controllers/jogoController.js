@@ -7,12 +7,11 @@ module.exports.jogoView = function (application, req, res) {
                 res.redirect('/');
                 return;
             }
-            if (req.query.error !== undefined) {
-                res.render('jogoView', { user: req.session, jogo: result, error: 'true' });
+            if (req.query.msg !== undefined) {
+                res.render('jogoView', { user: req.session, jogo: result, msg: req.query.msg });
                 return;
-            }
-            res.render('jogoView', { user: req.session, jogo: result, error: 'false' });
-            return;
+            }           
+            res.render('jogoView', { user: req.session, jogo: result, msg: '' });
         });
     } else {
         res.redirect('/');

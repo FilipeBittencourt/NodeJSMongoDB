@@ -21,7 +21,7 @@
                 window.location.href = "/sair";
             });
             $("#btn_aldeao").click(function () {
-                 $("#msgErros").hide();
+                $("#msgErros").hide();
                 $.ajax({
                     url: '/aldeao',
                     method: 'get',
@@ -37,16 +37,31 @@
                     method: 'get',
                     success: function (data) {
                         $("#acoes").html(data);
+                        clearTimeout(timerId);
+                        cronometro();
                     }
                 });
             });
         });
+        var timerId = null;
+        function cronometro() {
+            $('.tempo_restante').each(function () {
+                var segundos = $(this).html();
+                var segundos_atuais = parseInt(segundos) - 1;
+                if (segundos_atuais < 0) {
+                    //window.location.href = "/jogo?msg=acao";
+                      $(this).html("0");
+                } else {
+                    $(this).html(segundos_atuais);
+                }
+               
+            });
+            timerId = setTimeout('cronometro()', 1000);
+        }
     </script>
-
 </head>
 
 <body class="body-jogo">
-
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="form-group sair">
@@ -91,17 +106,35 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-9">
 
-                <% if(error === 'true') { %>
+
+                <% if(msg === 'erro') { %>
                     <div class="alert alert-danger" id="msgErros">
                         <b>Atenção!</b>
                         <ul>
                             <li>Operação inválida! Por favor, verifique os campos.</li>
                         </ul>
                     </div>
-                    <%}%>
-                        <div class="acoes" id="acoes">
-
+                    <%} else if(msg === 'sucesso') { %>
+                        <div class="alert alert-success" id="msgErros">
+                            <b>Atenção!</b>
+                            <ul>
+                                <li>Operação realizada com sucesso!</li>
+                            </ul>
                         </div>
+                        <%} else if(msg === 'acao') { %>
+                            <div class="alert alert-info" id="msgErros">
+                                <b>Atenção!</b>
+                                <ul>
+                                    <li>Ação foi finalizada com sucesso!</li>
+                                </ul>
+                            </div>
+
+                            <%}%>
+
+
+
+
+                                <div class="acoes" id="acoes"></div>
             </div>
         </div>
 

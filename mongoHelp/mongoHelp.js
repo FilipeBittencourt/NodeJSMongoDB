@@ -93,7 +93,7 @@ EX.: db.getCollection('aluno').find({
        idade:{$gt:30}
     });
 
-// or >> (SELECT * FROM ALUNO WHERE SEXO = 'F' or IDADE > 30 ")
+// OR >> (SELECT * FROM ALUNO WHERE SEXO = 'F' or IDADE > 30 ")
 {
 	$or:[
 	    {sexo:{$eq:'F'}},
@@ -107,6 +107,16 @@ Ex.: db.getCollection('aluno').find({
 	    {idade:{$gt:30}}
 	]
     });
+
+// IN/NOT IN >> (SELECT * FROM tickets WHERE _id in (1151,568,66))  para not in  / $nin 
+db.getCollection('tickets').find({ '_id': {$in:[
+    ObjectId("592ba968fdba133951ae0418"),
+    ObjectId("592ba967fdba133951ae0417"),
+    ObjectId("592ba968fdba133951ae0419")
+ ]}});
+
+////////////ILIKE %%  o 'i' no final é ignore case
+db.getCollection('tags').find({ name: /D/i })
 
 /////////////////////////////////////////////////////////// update
 
@@ -143,12 +153,13 @@ Ex.: db.getCollection('aluno').update(
         }
     )
 
-
 Ex.: db.billingcycles.update({$and: [{ month: 1}, { years: 2017 }] }, {$set:{credits:[{name:"Salário", value:5000}]}})
 //USANDO ID
 Ex.: db.experiences.update({"_id" : ObjectId("58f651417b8a61601690c546")},{$set: {name: 'aaa'}})
 
-
+////////////////////////// REMOVER ou add um novo campo no documento (upsert:false) não cria um novo doc. se for TRUE criará  outro doc.
+db.getCollection('tags').update({},{$set : {system:NumberInt(1)}},{upsert:false, multi:true})
+db.getCollection('experiences').update({}, {$unset: {tag:'none'}}, false, true);
 
 
 ////////////////////////////////////////////////save - O SAVE muda o documento quando se passa a chave. Do contrario ele faz insert também.
@@ -232,13 +243,6 @@ db.experiences.remove({"_id" : ObjectId("58f651417b8a61601690c546")})
 db.users.update({"_id" : ObjectId("59133c16e7e6ddd41f105e6c")},{$set: {"createdOn" : ISODate("2017-05-02T16:13:10.787Z")}})
 db.users.update({  email:"filipeicr@hotmail.com"  },{$set: {"createdOn" : ISODate("2017-05-01T16:13:10.787Z")}})
 db.users.update({  email:"filipe@sisnet.com.br"  },{$set: {"createdOn" : ISODate("2017-05-01T16:13:10.787Z")}})
-
-
-
-
-
-
 git clone -b dev/filipe https://github.com/sisnetglobal/theglint-backend.git
-
 
 

@@ -9,8 +9,7 @@ usuarioModel.prototype.inserirUsuario = function (usuario) {
             return err;
         }
         mongoClient.collection('usuario', (errMongo, collection) => {
-            if (errMongo) {
-                console.log(errMongo);
+            if (errMongo) {               
                 return errMongo;
             }
             collection.insert(usuario);
