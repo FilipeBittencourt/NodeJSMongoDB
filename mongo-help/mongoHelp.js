@@ -131,7 +131,7 @@ Ex.: db.aluno.update(
 	{
 		$set:{sexo:'Masculino', idade:29}
 	}
-}
+})
 
 Ex.: db.getCollection('aluno').update(
         {sexo: 'F'},

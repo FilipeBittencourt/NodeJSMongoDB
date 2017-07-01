@@ -19,7 +19,7 @@ app.use(expressSession({
 /* Autoload */
 consign()
     .include('api')
-    .then('src/model')
+    //.then('src/model')
     .then('src/controller')
     .into(app);
 

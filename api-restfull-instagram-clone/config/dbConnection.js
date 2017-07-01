@@ -2,7 +2,7 @@
 const mongo = require('mongodb');
 
 const connMongoDB = () => {
-	const banco = 'got';
+	const banco = 'instagram';
 	const server = 'localhost';
 	const porta = 27017;
 	const mongoParam = {};
